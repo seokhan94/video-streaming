@@ -1,0 +1,15 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: video-streaming
+  servlet:
+    multipart:
+      max-file-size: 500MB   # ??? ?? ?? ??
+      max-request-size: 500MB # ?? ?? ?? ??
+  rabbitmq:
+    host: localhost        # RabbitMQ ?? ???
+    port: 5672             # AMQP ?? ??
+    username: guest
+    password: guest
+    virtual-host: /        # ?? vhost

@@ -1,0 +1,25 @@
+<video id="videoPlayer" controls width="640" height="360"></video>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script>
+    var video = document.getElementById('videoPlayer');
+    if(Hls.isSupported()) {
+      const hls = new Hls();
+        hls.loadSource('http://localhost:8080/videos/5a2d9542-4281-4bb6-871a-da52fec4f498/master.m3u8');
+        hls.attachMedia(video);
+
+        hls.on(Hls.Events.MANIFEST_PARSED, function() {
+            // 모든 레벨 정보 출력
+            console.log(hls.levels);
+            // 수동으로 480p 선택
+            // hls.levels 배열에서 원하는 BANDWIDTH나 RESOLUTION 찾아서 index 사용
+            hls.currentLevel = 2; // 0: 720p, 1: 480p, 2: 360p
+            video.play();
+        });
+
+    } else {
+      video.src = 'http://localhost:8080/videos/FILE_ID/master.m3u8';
+      video.addEventListener('loadedmetadata',function() {
+        video.play();
+      });
+    }
+</script>
